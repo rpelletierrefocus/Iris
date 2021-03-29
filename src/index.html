@@ -159,6 +159,12 @@
 			custom_css.rel = "stylesheet";
 			custom_css.href = '/iris/custom.css?v='+build;
 			document.body.appendChild(custom_css);
+
+			// Construct the script tag
+			var custom_js = document.createElement("script");
+			custom_js.type = "application/javascript";
+			custom_js.href = '/iris/custom.js?v='+build;
+			document.body.appendChild(custom_js);
 		}
 	}
 

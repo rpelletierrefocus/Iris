@@ -1,0 +1,41 @@
+main {
+    bottom: 0px;
+}
+
+.sidebar__liner {
+    bottom: 0px;
+}
+
+.list__item__column--right button.context-menu-trigger {
+    width: 135px;
+    background: #08d58f;
+    border-color: #08d58f;
+    height: 40px;
+    margin: 0 0 0 2.5rem;
+}
+
+.list__item__column--right button.context-menu-trigger:before {
+    content: "Add Track";
+    margin: 7px 0 0 20px;
+}
+
+.list__item__column--right button.context-menu-trigger i {
+    display: none;
+}
+
+.heading__content .actions {
+    display: none;
+}
+
+.playback-controls, .sidebar .close {
+    display: none;
+}
+
+nav.sidebar__menu section.sidebar__menu__section:nth-of-type(3),
+nav.sidebar__menu section.sidebar__menu__section:nth-of-type(4){
+    display: none;
+}
+
+div.album-view div.actions, div.playlist-view div.actions {
+    display: none;
+}
