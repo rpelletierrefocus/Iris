@@ -1,5 +1,7 @@
 <img src="https://raw.githubusercontent.com/jaedb/Iris/master/src/assets/logo.png" width="128" />
 
+** This is a fork of the amazing Iris extension. I am modifying it to add a "Kiosk/Jukebox Mode" to allow people at a party to lookup and add tracks, but prevents them from making major changes like removing tracks, playing songs immediately, etc. In order the activate "Kiosk Mode", Iris needs to be started with the url ending with ?pusher={"username": "BarKiosk"}. This fork is really only meant for my specific uses and I frankly am only an OK at best developer, so if anyone has any suggestions, I am always willing to listen.
+
 Iris is an extension for the Mopidy music server. With support for Spotify, LastFM, Genius, Snapcast and many other extensions, Iris brings all your music into one user-friendly and unified web-based interface that works beautifully, no matter your device.
 
 Built and maintained by James Barnsley.
