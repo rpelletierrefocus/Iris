@@ -40,6 +40,7 @@ export default class Track extends React.Component {
 
   handleContextMenu = (e) => {
     const { handleContextMenu } = this.props;
+   console.log(e);
     handleContextMenu(e, this.key);
   }
 

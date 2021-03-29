@@ -31,6 +31,13 @@ import * as spotifyActions from '../services/spotify/actions';
 import { I18n, i18n } from '../locale';
 import { collate } from '../util/format';
 
+var json  = JSON.parse( localStorage.getItem( 'pusher' ) );
+if (json){
+  var user  = json.username;
+}
+
+console.log(user);
+
 class ContextMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -1146,133 +1153,247 @@ class ContextMenu extends React.Component {
       </div>
     );
 
-    switch (context.name) {
-      case 'album':
-        return (
-          <div>
-            {play_uris}
-            {play_uris_next}
-            {add_to_queue}
-            {this.canBeInLibrary() && <div className="context-menu__divider" />}
-            {this.canBeInLibrary() && toggle_in_library}
-            <div className="context-menu__divider" />
-            {go_to_artist}
-            {copy_uris}
-            {refresh}
-          </div>
-        );
-      case 'artist':
-        return (
-          <div>
-            {context.source === 'spotify' && play_artist_top_tracks}
-            {play_artist_all_tracks}
-            {context.source === 'spotify' && start_radio}
-            {this.canBeInLibrary() && <div className="context-menu__divider" />}
-            {this.canBeInLibrary() && toggle_in_library}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && go_to_recommendations}
-            {copy_uris}
-            {refresh}
-          </div>
-        );
-      case 'playlist':
-        return (
-          <div>
-            {play_playlist}
-            {play_playlist_next}
-            {shuffle_play_playlist}
-            {add_playlist_to_queue}
-            {this.canBeInLibrary() && <div className="context-menu__divider" /> }
-            {this.canBeInLibrary() && toggle_in_library}
-            {toggle_pinned}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && go_to_user}
-            {copy_uris}
-            {context.items_count === 1 && context.item.can_edit && (
+    if (user == 'BarKiosk'){
+      switch (context.name) {
+        case 'album':
+          return (
               <div>
+                {play_uris}
+                {play_uris_next}
+                {add_to_queue}
+                {this.canBeInLibrary() && <div className="context-menu__divider" />}
+                {this.canBeInLibrary() && toggle_in_library}
                 <div className="context-menu__divider" />
-                {edit_playlist}
-                {delete_playlist}
+                {go_to_artist}
+
+                {refresh}
               </div>
-            )}
-            {refresh}
-          </div>
-        );
-      case 'current-track':
-        return (
-          <div>
-            {add_to_playlist}
-            {this.canBeInLibrary() && toggle_in_library}
-            {toggle_loved}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
-            {context.items_count === 1 && go_to_track}
-            {copy_uris}
-          </div>
-        );
-      case 'queue-track':
-        return (
-          <div>
-            {context.items_count === 1 && play_queue_item}
-            <div className="context-menu__divider" />
-            {add_to_playlist}
-            {this.canBeInLibrary() && toggle_in_library}
-            {toggle_loved}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
-            {context.items_count === 1 && go_to_track}
-            {copy_uris}
-            <div className="context-menu__divider" />
-            {remove_from_queue}
-          </div>
-        );
-      case 'editable-playlist-track':
-        return (
-          <div>
-            {play_uris}
-            {play_uris_next}
-            {add_to_queue}
-            {context.source === 'spotify' && context.items_count === 1 && start_radio}
-            <div className="context-menu__divider" />
-            {add_to_playlist}
-            {this.canBeInLibrary() && toggle_in_library}
-            {toggle_loved}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
-            {context.items_count === 1 && go_to_track}
-            {copy_uris}
-            <div className="context-menu__divider" />
-            {remove_from_playlist}
-          </div>
-        );
-      case 'user':
-        return (
-          <div>
-            {this.canBeInLibrary() && toggle_in_library}
-            <div className="context-menu__divider" />
-            {copy_uris}
-            {refresh}
-          </div>
-        );
-      default:
-        return (
-          <div>
-            {play_uris}
-            {play_uris_next}
-            {add_to_queue}
-            {context.source === 'spotify' && context.items_count === 1 && start_radio}
-            <div className="context-menu__divider" />
-            {add_to_playlist}
-            {this.canBeInLibrary() && toggle_in_library}
-            {toggle_loved}
-            <div className="context-menu__divider" />
-            {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
-            {context.items_count === 1 && go_to_track}
-            <div className="context-menu__divider" />
-            {copy_uris}
-            {refresh}
-          </div>
-        );
+          );
+        case 'artist':
+          return (
+              <div>
+                {context.source === 'spotify' && play_artist_top_tracks}
+                {play_artist_all_tracks}
+                {context.source === 'spotify' && start_radio}
+                {this.canBeInLibrary() && <div className="context-menu__divider" />}
+                {this.canBeInLibrary() && toggle_in_library}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && go_to_recommendations}
+
+                {refresh}
+              </div>
+          );
+        case 'playlist':
+          return (
+              <div id='playlist'>
+                {play_playlist}
+                {play_playlist_next}
+                {shuffle_play_playlist}
+                {add_playlist_to_queue}
+                {this.canBeInLibrary() && <div className="context-menu__divider" /> }
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_pinned}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && go_to_user}
+
+                {context.items_count === 1 && context.item.can_edit && (
+                    <div>
+                      <div className="context-menu__divider" />
+                      {edit_playlist}
+                      {delete_playlist}
+                    </div>
+                )}
+                {refresh}
+              </div>
+          );
+        case 'current-track':
+          return (
+              <div id='queue-track'>
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+              </div>
+          );
+        case 'queue-track':
+          return (
+              <div id='queue-track'>
+                {context.items_count === 1 && play_queue_item}
+                <div className="context-menu__divider" />
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {remove_from_queue}
+              </div>
+          );
+        case 'editable-playlist-track':
+          return (
+              <div id='editable-playlist-track'>
+                {play_uris_next}
+                {add_to_queue}
+                {context.source === 'spotify' && context.items_count === 1 && start_radio}
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {remove_from_playlist}
+              </div>
+          );
+        case 'user':
+          return (
+              <div>
+                {this.canBeInLibrary() && toggle_in_library}
+                <div className="context-menu__divider" />
+                {refresh}
+              </div>
+          );
+        default:
+          return (
+              <div id='default'>
+                {add_to_queue}
+                {play_uris_next}
+                {toggle_loved}
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {refresh}
+              </div>
+          );
+      }
+    } else {
+      switch (context.name) {
+        case 'album':
+          return (
+              <div>
+                {play_uris}
+                {play_uris_next}
+                {add_to_queue}
+                {this.canBeInLibrary() && <div className="context-menu__divider" />}
+                {this.canBeInLibrary() && toggle_in_library}
+                <div className="context-menu__divider" />
+                {go_to_artist}
+                {copy_uris}
+                {refresh}
+              </div>
+          );
+        case 'artist':
+          return (
+              <div>
+                {context.source === 'spotify' && play_artist_top_tracks}
+                {play_artist_all_tracks}
+                {context.source === 'spotify' && start_radio}
+                {this.canBeInLibrary() && <div className="context-menu__divider" />}
+                {this.canBeInLibrary() && toggle_in_library}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && go_to_recommendations}
+                {copy_uris}
+                {refresh}
+              </div>
+          );
+        case 'playlist':
+          return (
+              <div>
+                {play_playlist}
+                {play_playlist_next}
+                {shuffle_play_playlist}
+                {add_playlist_to_queue}
+                {this.canBeInLibrary() && <div className="context-menu__divider" /> }
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_pinned}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && go_to_user}
+                {copy_uris}
+                {context.items_count === 1 && context.item.can_edit && (
+                    <div>
+                      <div className="context-menu__divider" />
+                      {edit_playlist}
+                      {delete_playlist}
+                    </div>
+                )}
+                {refresh}
+              </div>
+          );
+        case 'current-track':
+          return (
+              <div>
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {copy_uris}
+              </div>
+          );
+        case 'queue-track':
+          return (
+              <div>
+                {context.items_count === 1 && play_queue_item}
+                <div className="context-menu__divider" />
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {copy_uris}
+                <div className="context-menu__divider" />
+                {remove_from_queue}
+              </div>
+          );
+        case 'editable-playlist-track':
+          return (
+              <div>
+                {play_uris}
+                {play_uris_next}
+                {add_to_queue}
+                {context.source === 'spotify' && context.items_count === 1 && start_radio}
+                <div className="context-menu__divider" />
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                {copy_uris}
+                <div className="context-menu__divider" />
+                {remove_from_playlist}
+              </div>
+          );
+        case 'user':
+          return (
+              <div>
+                {this.canBeInLibrary() && toggle_in_library}
+                <div className="context-menu__divider" />
+                {copy_uris}
+                {refresh}
+              </div>
+          );
+        default:
+          return (
+              <div>
+                {play_uris}
+                {play_uris_next}
+                {add_to_queue}
+                {context.source === 'spotify' && context.items_count === 1 && start_radio}
+                <div className="context-menu__divider" />
+                {add_to_playlist}
+                {this.canBeInLibrary() && toggle_in_library}
+                {toggle_loved}
+                <div className="context-menu__divider" />
+                {context.source === 'spotify' && context.items_count <= 5 && go_to_recommendations}
+                {context.items_count === 1 && go_to_track}
+                <div className="context-menu__divider" />
+                {copy_uris}
+                {refresh}
+              </div>
+          );
+      }
     }
   }
 

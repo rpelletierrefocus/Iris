@@ -1,7 +1,7 @@
 {
   "manifest_version": "3.55",
-  "short_name": "Iris",
-  "name": "Iris",
+  "short_name": "Iris Kiosk",
+  "name": "Iris Kiosk",
   "icons": [
     {
       "src": "/iris/assets/app-icon_64.png",

@@ -106,7 +106,7 @@
 
 	// Release details
 	// These are automatically injected to built HTML
-	var build = "1616747492";
+	var build = "1617020831";
 	var version = "3.57.3";
 
 	// Construct the script tag
@@ -137,13 +137,31 @@
 
 	// Production-grade, minified app
 	} else {
-		css.href = '/iris/app.min.css?v='+build;
-		js.src = '/iris/app.min.js?v='+build;
+		//css.href = '/iris/app.min.css?v='+build;
+		//js.src = '/iris/app.min.js?v='+build;
+		css.href = '/iris/app.css?v='+build;
+		js.src = '/iris/app.js?v='+build;
 	}
 
 	// And finally inject our CSS/JS tags
 	document.body.appendChild(css);
 	document.body.appendChild(js);
+
+	var json  = JSON.parse( localStorage.getItem( 'pusher' ) );
+	if (json){
+		var user  = json.username;
+
+		console.log(json);
+
+		if ( user == 'BarKiosk' ){
+			// Construct our css tag
+			var custom_css = document.createElement("link");
+			custom_css.rel = "stylesheet";
+			custom_css.href = '/iris/custom.css?v='+build;
+			document.body.appendChild(custom_css);
+		}
+	}
+
 
 </script>
 
