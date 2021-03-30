@@ -34,9 +34,8 @@ import { collate } from '../util/format';
 var json  = JSON.parse( localStorage.getItem( 'pusher' ) );
 if (json){
   var user  = json.username;
+  user = user.toLowerCase();
 }
-
-console.log(user);
 
 class ContextMenu extends React.Component {
   constructor(props) {
@@ -229,6 +228,24 @@ class ContextMenu extends React.Component {
     const { spotify_available, menu: { items } } = this.props;
     if (!spotify_available) return false;
     return (uriSource(items[0].uri) === 'spotify');
+  }
+
+  isInQueue = (track_indexes) => {
+    const {
+      queue_tracks,
+      mopidyActions: {
+        removeTracks: doRemoveTracks,
+      },
+    } = this.props;
+    const tlids = [];
+    for (let i = 0; i < track_indexes.length; i++) {
+      const track = queue_tracks[track_indexes[i]];
+      if (track.tlid !== undefined) {
+        tlids.push(track.tlid);
+      }
+    }
+
+    console.log(queue_tracks);
   }
 
   toggleInLibrary = (e, in_library) => {
@@ -1153,7 +1170,8 @@ class ContextMenu extends React.Component {
       </div>
     );
 
-    if (user == 'BarKiosk'){
+    if ( ! ( user.includes('admin') ) ) {
+    //if (user == 'BarKiosk'){
       switch (context.name) {
         case 'album':
           return (
@@ -1165,7 +1183,6 @@ class ContextMenu extends React.Component {
                 {this.canBeInLibrary() && toggle_in_library}
                 <div className="context-menu__divider" />
                 {go_to_artist}
-
                 {refresh}
               </div>
           );

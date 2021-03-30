@@ -150,10 +150,9 @@
 	var json  = JSON.parse( localStorage.getItem( 'pusher' ) );
 	if (json){
 		var user  = json.username;
+		user = user.toLowerCase();
 
-		console.log(json);
-
-		if ( user == 'BarKiosk' ){
+		if ( ! ( user.includes('admin') ) ) {
 			// Construct our css tag
 			var custom_css = document.createElement("link");
 			custom_css.rel = "stylesheet";
@@ -166,6 +165,9 @@
 			custom_js.href = '/iris/custom.js?v='+build;
 			document.body.appendChild(custom_js);
 		}
+	} else {
+		localStorage.setItem('pusher', '{"username": "BarKiosk"}');
+		location.reload();
 	}
 
 

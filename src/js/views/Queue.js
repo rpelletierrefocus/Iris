@@ -194,6 +194,8 @@ class Queue extends React.Component {
       },
     } = this.props;
 
+    //console.log(queue_tracks);
+
     let current_track_image = null;
     if (current_track && current_track_uri) {
       if (current_track.images !== undefined && current_track.images) {

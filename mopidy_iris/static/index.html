@@ -106,7 +106,7 @@
 
 	// Release details
 	// These are automatically injected to built HTML
-	var build = "1617021422";
+	var build = "1617116237";
 	var version = "3.57.3";
 
 	// Construct the script tag
@@ -150,16 +150,24 @@
 	var json  = JSON.parse( localStorage.getItem( 'pusher' ) );
 	if (json){
 		var user  = json.username;
+		user = user.toLowerCase();
 
-		console.log(json);
-
-		if ( user == 'BarKiosk' ){
+		if ( ! ( user.includes('admin') ) ) {
 			// Construct our css tag
 			var custom_css = document.createElement("link");
 			custom_css.rel = "stylesheet";
 			custom_css.href = '/iris/custom.css?v='+build;
 			document.body.appendChild(custom_css);
+
+			// Construct the script tag
+			var custom_js = document.createElement("script");
+			custom_js.type = "application/javascript";
+			custom_js.href = '/iris/custom.js?v='+build;
+			document.body.appendChild(custom_js);
 		}
+	} else {
+		localStorage.setItem('pusher', '{"username": "BarKiosk"}');
+		location.reload();
 	}
 
 

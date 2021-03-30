@@ -27,3 +27,23 @@ main {
     display: none;
 }
 
+.playback-controls, .sidebar .close {
+    display: none;
+}
+
+nav.sidebar__menu section.sidebar__menu__section:nth-of-type(3),
+nav.sidebar__menu section.sidebar__menu__section:nth-of-type(4){
+    display: none;
+}
+
+div.album-view div.actions, div.playlist-view div.actions {
+    display: none;
+}
+
+div.queue-view button.context-menu-trigger {
+    display: none;
+}
+
+div.header__options__wrapper {
+    display: none;
+}

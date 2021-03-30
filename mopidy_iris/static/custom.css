@@ -39,3 +39,11 @@ nav.sidebar__menu section.sidebar__menu__section:nth-of-type(4){
 div.album-view div.actions, div.playlist-view div.actions {
     display: none;
 }
+
+div.queue-view button.context-menu-trigger {
+    display: none;
+}
+
+div.header__options__wrapper {
+    display: none;
+}

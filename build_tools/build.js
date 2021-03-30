@@ -89,4 +89,20 @@ copydir('src/assets', 'mopidy_iris/static/assets', { filter: assetsFilter }, fun
 	return true;
 });
 
+copyfile('src/scss/custom.css', 'mopidy_iris/static/custom.css', function(error){
+	if (error){
+		console.log('Build failed, could not copy custom.css', error);
+		return false;
+	}
+	console.log('Copied custom.css');
+});
+
+copyfile('src/js/custom.js', 'mopidy_iris/static/custom.js', function(error){
+	if (error){
+		console.log('Build failed, could not copy custom.js', error);
+		return false;
+	}
+	console.log('Copied custom.js');
+});
+
 return false;
